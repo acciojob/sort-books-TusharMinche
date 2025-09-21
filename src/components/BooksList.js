@@ -1,30 +1,42 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchBooks, setSortBy, setOrder, selectSortedBooks } from '../features/books/booksSlice'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchBooks,
+  setSortBy,
+  setOrder,
+  selectSortedBooks,
+} from "../features/books/booksSlice";
 
 export default function BooksList() {
-  const dispatch = useDispatch()
-  const books = useSelector(selectSortedBooks)
-  const loading = useSelector((s) => s.books.loading)
-  const error = useSelector((s) => s.books.error)
-  const sortBy = useSelector((s) => s.books.sortBy)
-  const order = useSelector((s) => s.books.order)
+  const dispatch = useDispatch();
+  const books = useSelector(selectSortedBooks);
+  const loading = useSelector((s) => s.books.loading);
+  const error = useSelector((s) => s.books.error);
+  const sortBy = useSelector((s) => s.books.sortBy);
+  const order = useSelector((s) => s.books.order);
 
   useEffect(() => {
-    dispatch(fetchBooks())
-  }, [dispatch])
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
-  const onSortByChange = (e) => dispatch(setSortBy(e.target.value))
-  const onOrderChange = (e) => dispatch(setOrder(e.target.value))
+  const onSortByChange = (e) => dispatch(setSortBy(e.target.value));
+  const onOrderChange = (e) => dispatch(setOrder(e.target.value));
 
   return (
     <div className="container">
       <h1>Books List</h1>
 
-      <div className="controls" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <div
+        className="controls"
+        style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+      >
         <label>
-          Sort By:
-          <select data-testid="sort-by" value={sortBy} onChange={onSortByChange}>
+          Sort by:
+          <select
+            data-testid="sort-by"
+            value={sortBy}
+            onChange={onSortByChange}
+          >
             <option value="title">Title</option>
             <option value="author">Author</option>
             <option value="publisher">Publisher</option>
@@ -39,7 +51,11 @@ export default function BooksList() {
           </select>
         </label>
 
-        <button data-testid="refresh-btn" onClick={() => dispatch(fetchBooks())} className="btn-refresh">
+        <button
+          data-testid="refresh-btn"
+          onClick={() => dispatch(fetchBooks())}
+          className="btn-refresh"
+        >
           Refresh
         </button>
       </div>
@@ -76,5 +92,5 @@ export default function BooksList() {
         </table>
       </div>
     </div>
-  )
+  );
 }
