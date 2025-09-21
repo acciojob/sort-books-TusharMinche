@@ -19,20 +19,29 @@ export default function BooksList() {
 
   return (
     <div className="container">
-      <h1>Book Sorting App</h1>
-      <div className="controls" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-        <select value={sortBy} onChange={onSortByChange} aria-label="Sort By">
-          <option value="title">Title</option>
-          <option value="author">Author</option>
-          <option value="publisher">Publisher</option>
-        </select>
+      <h1>Books List</h1>
 
-        <select value={order} onChange={onOrderChange} aria-label="Order">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      <div className="controls" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <label>
+          Sort By:
+          <select data-testid="sort-by" value={sortBy} onChange={onSortByChange}>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="publisher">Publisher</option>
+          </select>
+        </label>
 
-        <button onClick={() => dispatch(fetchBooks())} className="btn-refresh">Refresh</button>
+        <label>
+          Order:
+          <select data-testid="order" value={order} onChange={onOrderChange}>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </label>
+
+        <button data-testid="refresh-btn" onClick={() => dispatch(fetchBooks())} className="btn-refresh">
+          Refresh
+        </button>
       </div>
 
       {loading && <p>Loading books…</p>}
